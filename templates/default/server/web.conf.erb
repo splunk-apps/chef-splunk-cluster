@@ -1,0 +1,16 @@
+[settings]
+startwebserver = <% if @dedicated_search_head || @cluster_master || @cluster_search_head -%>1<% else -%>0<% end -%>
+httpport = <%= node['splunk']['web_server_port'] %>
+mgmtHostPort = 127.0.0.1:<%= node['splunk']['mgmt_server_port'] %>
+enableSplunkWebSSL = <%= node['splunk']['use_ssl'] %>  
+
+<% if node['splunk']['use_ssl'] -%>
+privKeyPath = <%= node['splunk']['server_home']%>/ssl/<%= node['splunk']['ssl_key']%>
+caCertPath = <%= node['splunk']['server_home']%>/ssl/<%= node['splunk']['ssl_crt']%>
+<% end -%>
+
+ui_inactivity_timeout = <%= node['splunk']['browser_timeout'] %>
+minify_js = <%= node['splunk']['minify_js'] %>
+minify_css = <%= node['splunk']['minify_css'] %>
+
+root_endpoint = <%= node['splunk']['root_endpoint'] %>
